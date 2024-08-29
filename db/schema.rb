@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_29_154609) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_29_182345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_29_154609) do
     t.index ["type_id"], name: "index_questions_on_type_id"
   end
 
+  create_table "survey_answers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "survey_id", null: false
+    t.bigint "user_answer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_survey_answers_on_survey_id"
+    t.index ["user_answer_id"], name: "index_survey_answers_on_user_answer_id"
+    t.index ["user_id"], name: "index_survey_answers_on_user_id"
+  end
+
   create_table "surveys", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id", null: false
@@ -46,6 +57,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_29_154609) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_answers", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.string "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_user_answers_on_question_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,5 +83,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_29_154609) do
   add_foreign_key "answers", "questions"
   add_foreign_key "questions", "surveys"
   add_foreign_key "questions", "types"
+  add_foreign_key "survey_answers", "surveys"
+  add_foreign_key "survey_answers", "user_answers"
+  add_foreign_key "survey_answers", "users"
   add_foreign_key "surveys", "users"
+  add_foreign_key "user_answers", "questions"
 end
