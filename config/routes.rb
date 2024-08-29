@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'questions/new'
+  get 'questions/create'
   resources :surveys do
     resources :questions, only: [:new, :create]
   end

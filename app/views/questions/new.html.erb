@@ -1,0 +1,6 @@
+<%= simple_form_for [@survey, @question] do |f| %>
+  <%= f.input :question %>
+  <%= f.input :type_id, collection: Type.all, label_method: :name, value_method: :id, prompt: 'Selecione o Tipo' %>
+  <%= f.input :position %>
+  <%= f.submit "Submit review", class: "btn btn-primary" %>
+<% end %>
