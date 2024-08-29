@@ -8,4 +8,5 @@ class Answer < ApplicationRecord
   def requires_position?
     %w[Checkbox Radio Button].include?(question.type)
   end
+
 end
