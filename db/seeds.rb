@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+Type.create!(name: "Radio Button")
+Type.create!(name: "Checkbox")
+Type.create!(name: "Textfield")
